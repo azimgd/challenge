@@ -52,7 +52,7 @@ module.exports = {
 	},
 	resolve: {
 		root: path.join(__dirname, 'src'),
-		extensions: ['', '.js']
+		extensions: ['', '.js', '.scss']
 	},
 	module: {
 		loaders

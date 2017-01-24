@@ -35,7 +35,8 @@ module.exports = {
 		filename: '[chunkhash].js'
 	},
 	resolve: {
-		extensions: ['', '.js']
+		root: path.join(__dirname, 'src'),
+		extensions: ['', '.js', '.scss']
 	},
 	module: {
 		loaders
