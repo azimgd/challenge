@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from 'containers/HomeContainer/index.scss';
+import styles from './index.scss';
 
 var MagentoAPI = require('magento-xmlrpc');
 var magento = new MagentoAPI({
