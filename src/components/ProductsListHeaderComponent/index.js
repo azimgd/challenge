@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import styles from './index.scss';
 
-const ProductsListItemComponent = () => (
+const ProductsListHeaderComponent = () => (
   <div className={styles.block}>
     <div className={styles.component}>
       <div>Order number</div>
@@ -13,7 +13,7 @@ const ProductsListItemComponent = () => (
   </div>
 );
 
-ProductsListItemComponent.propTypes = {
+ProductsListHeaderComponent.propTypes = {
 }
 
-export default ProductsListItemComponent;
+export default ProductsListHeaderComponent;

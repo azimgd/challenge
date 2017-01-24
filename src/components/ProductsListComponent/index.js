@@ -12,7 +12,7 @@ const ProductsListComponent = ({ itemComponent, headerComponent, products }) => 
 
       {products && products.length > 0 && products.map(
         (item, key) => <div key={key} className={styles.item}>
-          {React.cloneElement(itemComponent, { ...item })}
+          {React.cloneElement(itemComponent, { product: item })}
         </div>
       )}
 

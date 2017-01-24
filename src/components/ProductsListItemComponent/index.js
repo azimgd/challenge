@@ -1,13 +1,13 @@
 import React, { PropTypes } from 'react';
 import styles from './index.scss';
 
-const ProductsListItemComponent = ({ toggleModal }) => (
+const ProductsListItemComponent = ({ product, toggleModal }) => (
   <div className={styles.block}>
     <div className={styles.component}>
-      <div>#123</div>
-      <div>USD123</div>
-      <div>23 Oct</div>
-      <div>Azim Gadzhiagayev</div>
+      <div>#{product.id}</div>
+      <div>{product.year}</div>
+      <div>{product.year}</div>
+      <div>{product.pantone_value}</div>
       <div onClick={toggleModal}>Show details</div>
     </div>
   </div>
@@ -15,6 +15,7 @@ const ProductsListItemComponent = ({ toggleModal }) => (
 
 ProductsListItemComponent.propTypes = {
   toggleModal: PropTypes.func.isRequired,
+  product: PropTypes.object.isRequired,
 }
 
 export default ProductsListItemComponent;
