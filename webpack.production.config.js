@@ -6,6 +6,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 
+const assetsFolder = path.join(__dirname, 'src/assets');
 // local css modules
 loaders.push({
 	test: /[\/\\]src[\/\\].*\.css/,
@@ -41,6 +42,10 @@ module.exports = {
 	module: {
 		loaders
 	},
+	sassLoader: {
+    data: `@import "${assetsFolder}/main.scss";`,
+    includePaths: [assetsFolder]
+  },
 	plugins: [
 		new WebpackCleanupPlugin(),
 		new webpack.DefinePlugin({

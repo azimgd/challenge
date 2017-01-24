@@ -1,0 +1,12 @@
+.block {
+}
+
+.component {
+  .header {
+    margin-bottom: $padding-large;
+  }
+
+  .item:not(:last-child) {
+    margin-bottom: $padding-large;
+  }
+}

@@ -1,0 +1,11 @@
+@import "reset.scss";
+
+.block {
+  padding: $padding-large;
+  background: $color-primary;
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+.component {
+}

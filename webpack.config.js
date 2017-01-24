@@ -7,6 +7,7 @@ var DashboardPlugin = require('webpack-dashboard/plugin');
 
 const HOST = process.env.HOST || "127.0.0.1";
 const PORT = process.env.PORT || "8888";
+const assetsFolder = path.join(__dirname, 'src/assets');
 
 // global css
 loaders.push({
@@ -70,6 +71,10 @@ module.exports = {
 		port: PORT,
 		host: HOST
 	},
+	sassLoader: {
+    data: `@import "${assetsFolder}/main.scss";`,
+    includePaths: [assetsFolder]
+  },
 	plugins: [
 		new webpack.NoErrorsPlugin(),
 		new webpack.HotModuleReplacementPlugin(),
