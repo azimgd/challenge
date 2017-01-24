@@ -6,29 +6,49 @@ import ProductsPaginationComponent from 'components/ProductsPaginationComponent'
 import ProductDetailsComponent from 'components/ProductDetailsComponent';
 import ModalComponent from 'components/ModalComponent';
 import ModalComponentHoc from 'components/ModalComponent/hoc';
+import ProductsDataService from 'services/ProductsDataService';
 import styles from './index.scss';
 
-const HomeContainer = ({ toggleModal, isModalVisible }) => (
-  <div className={styles.block}>
-    <div className={styles.component}>
-      <ProductsListComponent
-        products={[ { a: 1 }, { a: 1 }, { a: 1 } ]}
-        itemComponent={<ProductsListItemComponent toggleModal={toggleModal} />}
-        headerComponent={<ProductsListHeaderComponent />}
-      />
-      <ProductsPaginationComponent />
-      {isModalVisible ?
-        <ModalComponent>
-          <ProductDetailsComponent toggleModal={toggleModal} />
-        </ModalComponent>
-      : null}
-    </div>
-  </div>
-);
+class HomeContainer extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  componentWillMount() {
+    this.props.fetchProducts();
+  }
+
+  render() {
+    return (
+      <div className={styles.block}>
+        <div className={styles.component}>
+          <ProductsListComponent
+            products={this.props.products.data}
+            itemComponent={<ProductsListItemComponent toggleModal={this.props.toggleModal} />}
+            headerComponent={<ProductsListHeaderComponent />}
+          />
+          <ProductsPaginationComponent />
+          {this.props.isModalVisible ?
+            <ModalComponent>
+              <ProductDetailsComponent toggleModal={this.props.toggleModal} />
+            </ModalComponent>
+          : null}
+        </div>
+      </div>
+    );
+  }
+}
 
 HomeContainer.propTypes = {
   isModalVisible: PropTypes.bool.isRequired,
   toggleModal: PropTypes.func.isRequired,
+  fetchProducts: PropTypes.func.isRequired,
+  products: PropTypes.shape({
+    data: PropTypes.arrayOf(PropTypes.object).isRequired,
+    isLoading: PropTypes.bool.isRequired,
+  }),
 };
 
-export default ModalComponentHoc(HomeContainer);
+export default ProductsDataService(
+  ModalComponentHoc(HomeContainer)
+);

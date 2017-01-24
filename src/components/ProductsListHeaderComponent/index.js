@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import styles from './index.scss';
 
-
 const ProductsListItemComponent = () => (
   <div className={styles.block}>
     <div className={styles.component}>
