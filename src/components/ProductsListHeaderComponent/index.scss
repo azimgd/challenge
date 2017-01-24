@@ -1,5 +1,5 @@
 .block {
-  background: $color-secondary;
+  background: $color-tertiary;
   padding: $padding-large;
 }
 
@@ -10,4 +10,18 @@
   div {
     flex: 1;
   }
+
+  @media all and (max-width: 664px) {
+    & {
+      flex-direction: column;
+      div:not(:last-child) {
+        margin-bottom: $padding-large;
+      }
+    }
+  }
+
+}
+
+.show {
+  cursor: pointer;
 }
