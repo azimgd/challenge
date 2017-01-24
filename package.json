@@ -3,10 +3,11 @@
   "version": "0.0.1",
   "description": "challenge",
   "scripts": {
+    "postinstall": "npm run build",
     "build": "webpack --config webpack.production.config.js --progress --profile --colors",
     "start": "webpack-dev-server --progress --profile --colors",
     "lint": "eslint --ext js src || exit 0",
-    "dev": " webpack-dashboard -- webpack-dev-server --progress --profile --colors"
+    "dev": "webpack-dashboard -- webpack-dev-server --progress --profile --colors"
   },
   "license": "MIT",
   "dependencies": {
