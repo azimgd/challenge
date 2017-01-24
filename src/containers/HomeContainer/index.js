@@ -7,15 +7,28 @@ import ProductDetailsComponent from 'components/ProductDetailsComponent';
 import ModalComponent from 'components/ModalComponent';
 import ModalComponentHoc from 'components/ModalComponent/hoc';
 import ProductsDataService from 'services/ProductsDataService';
+import { findProductById } from 'utils/ProductsUtils';
 import styles from './index.scss';
 
 class HomeContainer extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      selectedProduct: {},
+    };
+    this.selectProduct = this.selectProduct.bind(this);
   }
 
   componentWillMount() {
     this.props.fetchProducts();
+  }
+
+  selectProduct({ productId }) {
+    const selectedProduct = findProductById(this.props.products.data, productId);
+    if (selectedProduct) {
+      this.setState({ selectedProduct });
+      this.props.toggleModal();
+    }
   }
 
   render() {
@@ -24,7 +37,7 @@ class HomeContainer extends React.Component {
         <div className={styles.component}>
           <ProductsListComponent
             products={this.props.products.data}
-            itemComponent={<ProductsListItemComponent toggleModal={this.props.toggleModal} />}
+            itemComponent={<ProductsListItemComponent toggleModal={this.selectProduct} />}
             headerComponent={<ProductsListHeaderComponent />}
           />
           <ProductsPaginationComponent
@@ -33,7 +46,10 @@ class HomeContainer extends React.Component {
           />
           {this.props.isModalVisible ?
             <ModalComponent>
-              <ProductDetailsComponent toggleModal={this.props.toggleModal} />
+              <ProductDetailsComponent
+                selectedProduct={this.state.selectedProduct}
+                toggleModal={this.props.toggleModal}
+              />
             </ModalComponent>
           : null}
         </div>

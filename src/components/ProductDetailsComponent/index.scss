@@ -3,4 +3,19 @@
 }
 
 .component {
+  div:not(:last-child) {
+    margin-bottom: $padding-large;
+  }
+}
+
+.image {
+  img {
+    max-width: 100%;
+  }
+}
+
+.title {
+  font-size: $font-xlarge;
+  color: $color-tertiary;
+  text-transform: capitalize;
 }

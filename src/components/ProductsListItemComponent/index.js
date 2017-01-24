@@ -5,17 +5,17 @@ const ProductsListItemComponent = ({ product, toggleModal }) => (
   <div className={styles.block}>
     <div className={styles.component}>
       <div>#{product.id}</div>
-      <div>{product.year}</div>
+      <div>{product.name}</div>
       <div>{product.year}</div>
       <div>{product.pantone_value}</div>
-      <div onClick={toggleModal}>Show details</div>
+      <div onClick={toggleModal.bind(null, { productId: product.id })}>Show details</div>
     </div>
   </div>
 );
 
 ProductsListItemComponent.propTypes = {
   toggleModal: PropTypes.func.isRequired,
-  product: PropTypes.object.isRequired,
+  product: PropTypes.object,
 }
 
 export default ProductsListItemComponent;
