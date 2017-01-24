@@ -14,7 +14,7 @@
     "consolidate": "^0.14.5",
     "dotenv": "^4.0.0",
     "magento-xmlrpc": "^0.3.2",
-    "node-sass": "^4.2.0",
+    "node-sass": "3.13.1",
     "nunjucks": "^3.0.0",
     "react": "15.4.2",
     "react-dom": "15.4.2",
