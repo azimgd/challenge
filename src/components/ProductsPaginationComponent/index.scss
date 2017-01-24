@@ -1,0 +1,17 @@
+.block {
+  padding: $padding-large;
+}
+
+.component {
+  display: flex;
+  justify-content: space-around;
+}
+
+.button {
+  button {
+    background: $color-gray-light;
+    padding: $padding-base;
+    border: none;
+    cursor: pointer;
+  }
+}
