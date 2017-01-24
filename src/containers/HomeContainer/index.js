@@ -43,6 +43,7 @@ class HomeContainer extends React.Component {
           <ProductsPaginationComponent
             prevPage={this.props.prevPage}
             nextPage={this.props.nextPage}
+            currentNumber={this.props.products.pagination.page}
           />
           {this.props.isModalVisible ?
             <ModalComponent>

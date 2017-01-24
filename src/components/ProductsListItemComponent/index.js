@@ -8,7 +8,7 @@ const ProductsListItemComponent = ({ product, toggleModal }) => (
       <div>{product.name}</div>
       <div>{product.year}</div>
       <div>{product.pantone_value}</div>
-      <div onClick={toggleModal.bind(null, { productId: product.id })}>Show details</div>
+      <div className={styles.show} onClick={toggleModal.bind(null, { productId: product.id })}>Show details</div>
     </div>
   </div>
 );
