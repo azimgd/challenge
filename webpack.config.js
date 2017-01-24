@@ -51,6 +51,7 @@ module.exports = {
 		filename: 'bundle.js'
 	},
 	resolve: {
+		root: path.join(__dirname, 'src'),
 		extensions: ['', '.js']
 	},
 	module: {
