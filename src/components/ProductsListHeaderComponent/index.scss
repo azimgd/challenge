@@ -1,0 +1,13 @@
+.block {
+  background: $color-secondary;
+  padding: $padding-large;
+}
+
+.component {
+  display: flex;
+  justify-content: space-between;
+
+  div {
+    flex: 1;
+  }
+}

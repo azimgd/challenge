@@ -11,7 +11,7 @@ const ModalComponentHoc = (PassedComponent) => {
     }
 
     toggleModal() {
-      this.setState({ isModalVisible: !this.state.toggleModal });
+      this.setState({ isModalVisible: !this.state.isModalVisible });
     }
 
     render() {

@@ -1,7 +1,9 @@
 import React, { PropTypes } from 'react';
 import ProductsListComponent from 'components/ProductsListComponent';
+import ProductsListHeaderComponent from 'components/ProductsListHeaderComponent';
 import ProductsListItemComponent from 'components/ProductsListItemComponent';
 import ProductsPaginationComponent from 'components/ProductsPaginationComponent';
+import ProductDetailsComponent from 'components/ProductDetailsComponent';
 import ModalComponent from 'components/ModalComponent';
 import ModalComponentHoc from 'components/ModalComponent/hoc';
 import styles from './index.scss';
@@ -9,14 +11,15 @@ import styles from './index.scss';
 const HomeContainer = ({ toggleModal, isModalVisible }) => (
   <div className={styles.block}>
     <div className={styles.component}>
-      <button onClick={toggleModal}>Toggle</button>
-      <ProductsListComponent products={[ { a: 1 }, { a: 1 }, { a: 1 } ]}>
-        <ProductsListItemComponent />
-      </ProductsListComponent>
+      <ProductsListComponent
+        products={[ { a: 1 }, { a: 1 }, { a: 1 } ]}
+        itemComponent={<ProductsListItemComponent toggleModal={toggleModal} />}
+        headerComponent={<ProductsListHeaderComponent />}
+      />
       <ProductsPaginationComponent />
       {isModalVisible ?
         <ModalComponent>
-        123123
+          <ProductDetailsComponent toggleModal={toggleModal} />
         </ModalComponent>
       : null}
     </div>
