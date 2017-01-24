@@ -27,7 +27,10 @@ class HomeContainer extends React.Component {
             itemComponent={<ProductsListItemComponent toggleModal={this.props.toggleModal} />}
             headerComponent={<ProductsListHeaderComponent />}
           />
-          <ProductsPaginationComponent />
+          <ProductsPaginationComponent
+            prevPage={this.props.prevPage}
+            nextPage={this.props.nextPage}
+          />
           {this.props.isModalVisible ?
             <ModalComponent>
               <ProductDetailsComponent toggleModal={this.props.toggleModal} />
@@ -43,6 +46,8 @@ HomeContainer.propTypes = {
   isModalVisible: PropTypes.bool.isRequired,
   toggleModal: PropTypes.func.isRequired,
   fetchProducts: PropTypes.func.isRequired,
+  prevPage: PropTypes.func.isRequired,
+  nextPage: PropTypes.func.isRequired,
   products: PropTypes.shape({
     data: PropTypes.arrayOf(PropTypes.object).isRequired,
     isLoading: PropTypes.bool.isRequired,
