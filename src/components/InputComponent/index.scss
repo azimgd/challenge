@@ -1,0 +1,29 @@
+.block {
+}
+
+.component {
+  display: flex;
+  flex-direction: column;
+  background: $color-white;
+  padding: $padding-small $padding-base;
+}
+
+.input {
+  background: none;
+  border: none;
+  padding: $padding-small 0;
+  &:focus {
+    outline:none;
+  }
+  &_isBlur {
+    line-height: 24px;
+  }
+}
+
+.label {
+  font-size: $font-small;
+  color: $color-secondary;
+  &_isBlur {
+    display: none;
+  }
+}

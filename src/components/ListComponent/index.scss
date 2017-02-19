@@ -6,6 +6,11 @@
     margin-bottom: $padding-large;
   }
 
+  .empty {
+    padding: $padding-large;
+    text-align: center;
+  }
+
   .item:not(:last-child) {
     margin-bottom: $padding-large;
   }

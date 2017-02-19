@@ -1,34 +1,35 @@
 import React, { PropTypes } from 'react';
 import styles from './index.scss';
 
-const ProductsListComponent = ({ itemComponent, headerComponent, products }) => (
+const ListComponent = ({ itemComponent, headerComponent, isLoading, items }) => (
   <div className={styles.block}>
     <div className={styles.component}>
-      {products && products.length > 0 ?
+      {items && items.length > 0 ?
         <div className={styles.header}>
           {headerComponent}
         </div>
       : null}
 
-      {products && products.length > 0 && products.map(
+      {items && items.length > 0 && items.map(
         (item, key) => <div key={key} className={styles.item}>
           {React.cloneElement(itemComponent, { product: item })}
         </div>
       )}
 
-      {!products || !products.length ?
-        <div className={styles.header}>
-          Empty list
+      {!isLoading && (!items || !items.length) ?
+        <div className={styles.empty}>
+          No data is available for your request...
         </div>
       : null}
     </div>
   </div>
 );
 
-ProductsListComponent.propTypes = {
-  products: PropTypes.arrayOf(PropTypes.object).isRequired,
+ListComponent.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.object).isRequired,
+  isLoading: PropTypes.bool.isRequired,
   itemComponent: PropTypes.object.isRequired,
   headerComponent: PropTypes.object.isRequired,
 };
 
-export default ProductsListComponent;
+export default ListComponent;

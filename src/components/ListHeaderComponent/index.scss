@@ -1,0 +1,13 @@
+.block {
+  background: $color-secondary;
+  padding: $padding-large;
+  color: $color-secondary-text;
+}
+
+.component {
+  @include listItemComponent('.component');
+}
+
+.show {
+  cursor: pointer;
+}

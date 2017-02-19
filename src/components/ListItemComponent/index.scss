@@ -1,0 +1,10 @@
+.block {
+  padding: $padding-large;
+}
+
+.component {
+  @include listItemComponent('.component');
+}
+
+.show {
+}

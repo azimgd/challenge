@@ -1,10 +1,17 @@
+$padding-small: 4px;
 $padding-base: 8px;
 $padding-large: 16px;
 
-$color-primary: #D6EBC7;
-$color-secondary: #81C5DB;
-$color-tertiary: #69D2E7;
+$color-white: #ffffff;
+$color-primary: #fafafa;
+$color-secondary: #02b875;
+$color-secondary-text: #ffffff;
+$color-tertiary: lighten(#24292e, 14%);
 $color-gray-light: #EAE8E8;
 
+$font-small: 11px;
+$font-base: 13px;
 $font-large: 16px;
 $font-xlarge: 24px;
+
+@import "./shared/listItemComponent";

@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import styles from './index.scss';
 
-const ProductsPaginationComponent = ({ isLoading, currentNumber, nextPage, prevPage }) => (
+const PaginationComponent = ({ isLoading, currentNumber, nextPage, prevPage }) => (
   <div className={styles.block}>
     <div className={styles.component}>
       <div className={styles.button}>
@@ -10,7 +10,7 @@ const ProductsPaginationComponent = ({ isLoading, currentNumber, nextPage, prevP
 
       {isLoading ?
         <div className={styles.number}>
-          is loading
+          is loading ...
         </div>
       : null}
 
@@ -27,10 +27,10 @@ const ProductsPaginationComponent = ({ isLoading, currentNumber, nextPage, prevP
   </div>
 );
 
-ProductsPaginationComponent.propTypes = {
+PaginationComponent.propTypes = {
   prevPage: PropTypes.func.isRequired,
   nextPage: PropTypes.func.isRequired,
   currentNumber: PropTypes.number.isRequired,
 };
 
-export default ProductsPaginationComponent;
+export default PaginationComponent;

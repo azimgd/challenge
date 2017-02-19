@@ -1,0 +1,25 @@
+@mixin listItemComponent($parent) {
+  display: flex;
+  justify-content: space-between;
+
+  #{$parent}_id {
+    width: 60px;
+    font-weight: bold;
+  }
+
+  #{$parent}_joke {
+    width: 70%;
+  }
+
+  #{$parent}_category {
+    width: 30%;
+    text-align: right;
+  }
+
+  @media all and (max-width: 664px) {
+    flex-direction: column;
+    div:not(:last-child) {
+      margin-bottom: $padding-large;
+    }
+  }
+}
