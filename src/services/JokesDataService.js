@@ -9,7 +9,8 @@ const JokesDataServiceHoc = (PassedComponent, isPaginationEnabled, jokesPerPage)
       this.state = {
         data: [],
         isLoading: false,
-        page: 1
+        page: 1,
+        searchQuery: null,
       };
       this.fetchData = this.fetchData.bind(this);
       this.onDataLoading = this.onDataLoading.bind(this);
@@ -17,6 +18,7 @@ const JokesDataServiceHoc = (PassedComponent, isPaginationEnabled, jokesPerPage)
       this.onDataFailed = this.onDataFailed.bind(this);
       this.nextPage = this.nextPage.bind(this);
       this.prevPage = this.prevPage.bind(this);
+      this.onSearch = this.onSearch.bind(this);
     }
 
     apiCall() {
@@ -29,10 +31,9 @@ const JokesDataServiceHoc = (PassedComponent, isPaginationEnabled, jokesPerPage)
     }
 
     onDataLoaded(res) {
-      const { value } = res.data;
       const successState = update(this.state, {
         isLoading: { $set: false },
-        data: { $set: value },
+        data: { $set: res.data.value },
       });
       this.setState(successState);
     }
@@ -56,25 +57,40 @@ const JokesDataServiceHoc = (PassedComponent, isPaginationEnabled, jokesPerPage)
       });
     }
 
+    filterBySearch(posts, searchQuery) {
+      if (!searchQuery) { return posts; }
+      return update(posts, {
+        data: { $search: searchQuery },
+      });
+    }
+
     nextPage() {
-      const state = update(this.state, { page: { $set: this.state.page + 1 } });
+      const state = update(this.state, { page: { $nextPage: 1 } });
       this.setState(state);
     }
 
     prevPage() {
-      const state = update(this.state, { page: { $set: this.state.page - 1 } });
+      const state = update(this.state, { page: { $prevPage: 1 } });
+      this.setState(state);
+    }
+
+    onSearch(e) {
+      const state = update(this.state, { searchQuery: { $set: e.target.value } });
       this.setState(state);
     }
 
     render() {
-      const state = isPaginationEnabled ? this.paginateResults(this.state, this.state.page) : this.state;
+      const paginatedState = isPaginationEnabled ? this.paginateResults(this.state, this.state.page) : this.state;
+      const searchState = this.filterBySearch(this.state, this.state.searchQuery);
+      const responseData = this.state.searchQuery ? searchState : paginatedState;
       return (
         <PassedComponent
           {...this.props}
-          responseData={state}
+          responseData={responseData}
           fetchData={this.fetchData}
           nextPage={this.nextPage}
           prevPage={this.prevPage}
+          onSearch={this.onSearch}
         />
       );
     }

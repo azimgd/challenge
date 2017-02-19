@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 const InputComponentHoc = (PassedComponent) => {
   class WrappedComponent extends React.Component {
@@ -12,16 +12,19 @@ const InputComponentHoc = (PassedComponent) => {
       this.onChange = this.onChange.bind(this);
     }
 
-    onFocus() {
+    onFocus(e) {
+      this.props.onFocus && this.props.onFocus(e);
       this.setState({ isFocused: true });
     }
 
     onBlur(e) {
+      this.props.onBlur && this.props.onBlur(e);
       if (e.target.value.length !== 0) { return; }
       this.setState({ isFocused: false });
     }
 
     onChange(e) {
+      this.props.onChange && this.props.onChange(e);
       this.setState({ isFocused: true });
     }
 
@@ -37,6 +40,12 @@ const InputComponentHoc = (PassedComponent) => {
       );
     }
   }
+
+  WrappedComponent.propTypes = {
+    onFocus: PropTypes.func,
+    onChange: PropTypes.func,
+    onBlur: PropTypes.func,
+  };
 
   return WrappedComponent;
 };

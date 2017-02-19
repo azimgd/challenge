@@ -34,7 +34,7 @@ class HomeContainer extends React.Component {
       <div className={styles.block}>
         <div className={styles.component}>
           <ControlComponent
-            search={<InputComponent onFocus label="Search" />}
+            search={<InputComponent onChange={this.props.onSearch} label="Search" />}
             filter={<InputComponent label="Filter" />}
           />
           <ListComponent
@@ -43,12 +43,14 @@ class HomeContainer extends React.Component {
             headerComponent={<ListHeaderComponent />}
             isLoading={this.props.responseData.isLoading}
           />
-          <PaginationComponent
-            prevPage={this.prevPage}
-            nextPage={this.nextPage}
-            currentNumber={this.props.responseData.page}
-            isLoading={this.props.responseData.isLoading}
-          />
+          {!this.props.responseData.searchQuery ?
+            <PaginationComponent
+              prevPage={this.prevPage}
+              nextPage={this.nextPage}
+              currentNumber={this.props.responseData.page}
+              isLoading={this.props.responseData.isLoading}
+            />
+          : null}
         </div>
       </div>
     );
@@ -59,10 +61,12 @@ HomeContainer.propTypes = {
   fetchData: PropTypes.func.isRequired,
   prevPage: PropTypes.func.isRequired,
   nextPage: PropTypes.func.isRequired,
+  onSearch: PropTypes.func.isRequired,
   responseData: PropTypes.shape({
     data: PropTypes.arrayOf(PropTypes.object).isRequired,
     page: PropTypes.number.isRequired,
     isLoading: PropTypes.bool.isRequired,
+    searchQuery: PropTypes.string.isRequired,
   }),
 };
 

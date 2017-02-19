@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import styles from './index.scss';
 
 const ControlComponent = ({ filter, search }) => (
@@ -15,6 +15,8 @@ const ControlComponent = ({ filter, search }) => (
 );
 
 ControlComponent.propTypes = {
+  filter: PropTypes.object.isRequired,
+  search: PropTypes.object.isRequired,
 }
 
 export default ControlComponent;
