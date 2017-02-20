@@ -7,7 +7,8 @@
     "build": "webpack --config webpack.production.config.js --progress --profile --colors",
     "start": "webpack-dev-server --progress --profile --colors",
     "lint": "eslint --ext js src || exit 0",
-    "dev": "webpack-dashboard -- webpack-dev-server --progress --profile --colors"
+    "dev": "webpack-dashboard -- webpack-dev-server --progress --profile --colors",
+    "test": "./node_modules/mocha/bin/mocha --compilers js:babel-core/register"
   },
   "license": "MIT",
   "dependencies": {
@@ -16,14 +17,19 @@
     "classnames": "^2.2.5",
     "consolidate": "^0.14.5",
     "dotenv": "^4.0.0",
+    "eslint": "^3.14.0",
+    "eslint-plugin-react": "^6.9.0",
+    "expect.js": "^0.3.1",
     "immutability-helper": "^2.1.1",
     "magento-xmlrpc": "^0.3.2",
+    "mocha": "^3.2.0",
     "node-sass": "3.13.1",
     "nunjucks": "^3.0.0",
     "react": "15.4.2",
     "react-dom": "15.4.2",
     "react-router": "^3.0.2",
-    "sass-loader": "^4.0.2"
+    "sass-loader": "^4.0.2",
+    "sinon": "^1.17.7"
   },
   "devDependencies": {
     "babel-core": "6.21.0",
