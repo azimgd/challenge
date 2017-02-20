@@ -1,7 +1,12 @@
 {
+  "extends": "airbnb",
   "plugins": [
     "react"
   ],
   "rules": {
+  },
+  "env": {
+    "node": true,
+    "mocha": true
   }
 }

@@ -22,13 +22,13 @@ describe('Immutability service', () => {
 
   it('Finds all jokes including search query', () => {
     expect(ImmutabilityService.searchByQuery).to.be.a('function');
-    expect(ImmutabilityService.searchByQuery('ds', [{ joke: 'asd'}, { joke: 'dsa'}, { joke: undefined }])).to.eql([{ joke: 'dsa'}]);
+    expect(ImmutabilityService.searchByQuery('ds', [{ joke: 'asd' }, { joke: 'dsa' }, { joke: undefined }])).to.eql([{ joke: 'dsa' }]);
     expect(ImmutabilityService.searchByQuery(null, [])).to.eql([]);
   });
 
   it('Finds all jokes including search query', () => {
     expect(ImmutabilityService.filterByCategories).to.be.a('function');
-    expect(ImmutabilityService.filterByCategories(['dsa', 'asd'], [{ categories: ['asd']}, { categories: ['dsa']}, { categories: undefined }])).to.eql([{ categories: ['asd']}, { categories: ['dsa']}]);
+    expect(ImmutabilityService.filterByCategories(['dsa', 'asd'], [{ categories: ['asd'] }, { categories: ['dsa'] }, { categories: undefined }])).to.eql([{ categories: ['asd'] }, { categories: ['dsa'] }]);
     expect(ImmutabilityService.filterByCategories(null, [])).to.eql([]);
   });
 

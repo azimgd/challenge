@@ -1,16 +1,17 @@
 import { newContext } from 'immutability-helper';
+
 const immutability = newContext();
 
 const isArray = input => Array.isArray(input);
 const isObject = input => input !== null && typeof input === 'object';
-const isInteger = input => parseInt(input) === input;
+const isInteger = input => parseInt(input, 10) === input;
 
 /**
  * Creates an array of unique, intersecting values from provided arrays
  */
 export const arrayIntersection = (first, second) => {
   if (!isArray(first) || !isArray(second)) { return []; }
-  return first.filter((item) => second.includes(item));
+  return first.filter(item => second.includes(item));
 };
 
 /**
@@ -18,7 +19,7 @@ export const arrayIntersection = (first, second) => {
  */
 export const findIndex = (array, query) => {
   if (!isArray(array)) { return false; }
-  return array.findIndex((item) => item === query)
+  return array.findIndex(item => item === query);
 };
 
 /**
@@ -26,7 +27,9 @@ export const findIndex = (array, query) => {
  */
 export const paginationSlice = (pagination, original) => {
   if (!isObject(pagination) || !isArray(original)) { return []; }
-  return original.slice((pagination.page - 1) * pagination.perPage, pagination.page * pagination.perPage);
+  return original.slice(
+    (pagination.page - 1) * pagination.perPage, pagination.page * pagination.perPage,
+  );
 };
 
 /**
@@ -34,11 +37,11 @@ export const paginationSlice = (pagination, original) => {
  */
 export const searchByQuery = (searchQuery, original) => {
   if (!isArray(original)) { return []; }
-  return original.filter(item => {
+  return original.filter((item) => {
     const target = String(item.joke).toLowerCase();
     const query = String(searchQuery).toLowerCase();
     return target.includes(query);
-  })
+  });
 };
 
 /**
@@ -65,7 +68,7 @@ export const removeCategory = (category, original) => {
   if (!arrayIntersection(original, [category]).length) { return original; }
   const index = findIndex(original, category);
   return immutability(original, { $splice: [[index, 1]] });
-}
+};
 
 /**
  * Scrolls pages
@@ -73,11 +76,11 @@ export const removeCategory = (category, original) => {
 export const nextPage = (count, original) => {
   if (!isInteger(count) || !isInteger(original)) { return 1; }
   return original + count;
-}
+};
 export const prevPage = (count, original) => {
   if (!isInteger(count) || !isInteger(original)) { return 1; }
   return original - count;
-}
+};
 
 immutability.extend('$searchByQuery', searchByQuery);
 immutability.extend('$filterByCategories', filterByCategories);
