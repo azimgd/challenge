@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import ListComponent from 'components/ListComponent';
 import ListItemComponent from 'components/ListItemComponent';
 import InputComponent from 'components/InputComponent';
+import CategoriesComponent from 'components/CategoriesComponent';
 import ControlComponent from 'components/ControlComponent';
 import ListHeaderComponent from 'components/ListHeaderComponent';
 import PaginationComponent from 'components/PaginationComponent';
@@ -35,7 +36,7 @@ class HomeContainer extends React.Component {
         <div className={styles.component}>
           <ControlComponent
             search={<InputComponent onChange={this.props.onSearch} label="Search" />}
-            filter={<InputComponent label="Filter" />}
+            filter={<CategoriesComponent onChange={this.props.onfilterByCategories} categories={['explicit', 'nerdy']} />}
           />
           <ListComponent
             items={this.props.responseData.data}
@@ -62,6 +63,7 @@ HomeContainer.propTypes = {
   prevPage: PropTypes.func.isRequired,
   nextPage: PropTypes.func.isRequired,
   onSearch: PropTypes.func.isRequired,
+  onfilterByCategories: PropTypes.func.isRequired,
   responseData: PropTypes.shape({
     data: PropTypes.arrayOf(PropTypes.object).isRequired,
     page: PropTypes.number.isRequired,

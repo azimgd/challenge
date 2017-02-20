@@ -11,6 +11,7 @@ const JokesDataServiceHoc = (PassedComponent, isPaginationEnabled, jokesPerPage)
         isLoading: false,
         page: 1,
         searchQuery: null,
+        categoriesQuery: [],
       };
       this.fetchData = this.fetchData.bind(this);
       this.onDataLoading = this.onDataLoading.bind(this);
@@ -19,10 +20,12 @@ const JokesDataServiceHoc = (PassedComponent, isPaginationEnabled, jokesPerPage)
       this.nextPage = this.nextPage.bind(this);
       this.prevPage = this.prevPage.bind(this);
       this.onSearch = this.onSearch.bind(this);
+      this.onfilterByCategories = this.onfilterByCategories.bind(this);
     }
 
-    apiCall() {
-      return axios.get(`http://api.icndb.com/jokes`, { params: { escape: 'javascript' } });
+    apiCall(params) {
+      const { firstName, lastName } = params || {};
+      return axios.get(`http://api.icndb.com/jokes`, { params: { escape: 'javascript', firstName, lastName } });
     }
 
     onDataLoading() {
@@ -43,10 +46,10 @@ const JokesDataServiceHoc = (PassedComponent, isPaginationEnabled, jokesPerPage)
       this.setState(loadingState);
     }
 
-    fetchData() {
+    fetchData(params) {
       if (this.state.isLoading) { return; }
       this.onDataLoading();
-      this.apiCall()
+      this.apiCall(params)
       .then(this.onDataLoaded)
       .catch(this.onDataFailed);
     }
@@ -60,7 +63,14 @@ const JokesDataServiceHoc = (PassedComponent, isPaginationEnabled, jokesPerPage)
     filterBySearch(posts, searchQuery) {
       if (!searchQuery) { return posts; }
       return update(posts, {
-        data: { $search: searchQuery },
+        data: { $searchByQuery: searchQuery },
+      });
+    }
+
+    filterByCategories(posts, categories) {
+      if (!categories || !categories.length) { return posts; }
+      return update(posts, {
+        data: { $filterByCategories: categories },
       });
     }
 
@@ -79,18 +89,25 @@ const JokesDataServiceHoc = (PassedComponent, isPaginationEnabled, jokesPerPage)
       this.setState(state);
     }
 
+    onfilterByCategories(categories) {
+      const state = update(this.state, { categoriesQuery: { $set: categories } });
+      this.setState(state);
+    }
+
     render() {
       const paginatedState = isPaginationEnabled ? this.paginateResults(this.state, this.state.page) : this.state;
       const searchState = this.filterBySearch(this.state, this.state.searchQuery);
       const responseData = this.state.searchQuery ? searchState : paginatedState;
+      const data = this.state.categoriesQuery.length ? this.filterByCategories(this.state, this.state.categoriesQuery) : responseData;
       return (
         <PassedComponent
           {...this.props}
-          responseData={responseData}
+          responseData={data}
           fetchData={this.fetchData}
           nextPage={this.nextPage}
           prevPage={this.prevPage}
           onSearch={this.onSearch}
+          onfilterByCategories={this.onfilterByCategories}
         />
       );
     }

@@ -5,7 +5,13 @@
 }
 
 .component {
-  @include listItemComponent('.component');
+  display: flex;
+  justify-content: space-between;
+
+  div {
+    display: flex;
+    align-items: center;
+  }
 }
 
 .show {

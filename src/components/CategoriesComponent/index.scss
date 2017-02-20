@@ -1,0 +1,20 @@
+.block {
+}
+
+.component {
+}
+
+.category {
+  display: inline-block;
+  &:not(:last-child) {
+    margin-right: $padding-base;
+  }
+  & > a {
+    color: $color-white;
+    text-decoration: none;
+  }
+  &_active > a {
+    color: $color-secondary;
+    text-decoration: underline;
+  }
+}
