@@ -13,14 +13,24 @@ const locations = {
   viewFolder: path.join(__dirname, 'public'),
 };
 
-const onAuthSuccess = (req, res) => {
-  // Successful authentication, redirect home.
-  res.redirect('/');
+const isAuthenticated = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  return res.send(401);
 };
 
 module.exports = {
   init: () => {
     const app = express();
+    app.use(expressSession({
+      secret: process.env.sessionHash,
+      resave: true,
+      saveUninitialized: true,
+    }));
+
+    app.use(passport.initialize());
+    app.use(passport.session());
 
     app.set('view engine', 'html');
     app.set('views', locations.viewFolder);
@@ -28,14 +38,6 @@ module.exports = {
 
     app.use(cookieParser());
     app.use(bodyParser.urlencoded({ extended: true }));
-    app.use(expressSession({ secret: 'secret hash', resave: true, saveUninitialized: true }));
-
-    return Promise.resolve(app);
-  },
-
-  connectPassport: (app) => {
-    app.use(passport.initialize());
-    app.use(passport.session());
 
     passport.serializeUser((user, done) => { done(null, user); });
     passport.deserializeUser((user, done) => { done(null, user); });
@@ -45,17 +47,17 @@ module.exports = {
       clientSecret: process.env.clientSecret,
       callbackURL: process.env.callbackURL,
     }, (accessToken, refreshToken, profile, cb) => {
-      console.log(accessToken, profile, 321);
       cb(null, profile);
     }));
 
-    return app;
+    return Promise.resolve(app);
   },
 
   routes: (app) => {
     const buildPath = express.static(locations.buildFolder);
+    app.get('/user', isAuthenticated, (req, res) => res.json({ displayName: req.user.displayName, name: req.user.name }));
     app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
-    app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), onAuthSuccess);
+    app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login', successRedirect: '/' }));
     app.use('/', buildPath);
     app.get('*', (_, res) => { res.render('index'); });
 

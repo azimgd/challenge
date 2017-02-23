@@ -17,7 +17,11 @@ class HomeContainer extends React.Component {
   }
 
   componentWillMount() {
-    this.props.fetchData();
+    if (this.props.user && Object.keys(this.props.user).length) {
+      this.props.fetchData({ firstName: this.props.user.name.givenName, lastName: this.props.user.name.familyName });
+    } else {
+      this.props.fetchData();
+    }
   }
 
   nextPage(e) {
