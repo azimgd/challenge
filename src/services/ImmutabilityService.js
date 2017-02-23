@@ -79,6 +79,7 @@ export const nextPage = (count, original) => {
 };
 export const prevPage = (count, original) => {
   if (!isInteger(count) || !isInteger(original)) { return 1; }
+  if (count < 1) { return 0; }
   return original - count;
 };
 
