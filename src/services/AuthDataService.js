@@ -18,7 +18,7 @@ const AuthDataServiceHoc = (PassedComponent) => {
     }
 
     apiCall() {
-      return axios.get('http://localhost:8080/user');
+      return axios.get('/user');
     }
 
     onDataLoading() {

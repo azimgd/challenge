@@ -14,7 +14,7 @@ class AuthContainer extends React.Component {
         : null}
 
         {!this.props.isAuthorised ?
-          <a href="http://localhost:8080/auth/google">Sign in with google</a>
+          <a href="/auth/google">Sign in with google</a>
         : null}
       </div>
     );
