@@ -12,6 +12,16 @@
     display: flex;
     align-items: center;
   }
+
+  @media all and (max-width: 664px) {
+    flex-direction: column;
+    div {
+      display: block;
+    }
+    div:not(:last-child) {
+      margin-bottom: $padding-large;
+    }
+  }
 }
 
 .show {
