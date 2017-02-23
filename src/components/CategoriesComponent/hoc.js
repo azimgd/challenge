@@ -7,7 +7,7 @@ const CategoriesComponentHoc = (PassedComponent) => {
       super(props);
       this.state = {
         selected: [],
-      }
+      };
       this.onSelect = this.onSelect.bind(this);
     }
 
@@ -37,6 +37,11 @@ const CategoriesComponentHoc = (PassedComponent) => {
       );
     }
   }
+
+  WrappedComponent.defaultProps = {
+    onChange: () => {},
+    onSelect: () => {},
+  };
 
   WrappedComponent.propTypes = {
     onChange: PropTypes.func,

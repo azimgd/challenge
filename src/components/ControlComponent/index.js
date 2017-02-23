@@ -17,6 +17,6 @@ const ControlComponent = ({ filter, search }) => (
 ControlComponent.propTypes = {
   filter: PropTypes.object.isRequired,
   search: PropTypes.object.isRequired,
-}
+};
 
 export default ControlComponent;

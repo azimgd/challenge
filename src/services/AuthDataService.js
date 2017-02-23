@@ -17,10 +17,6 @@ const AuthDataServiceHoc = (PassedComponent) => {
       this.fetchData = this.fetchData.bind(this);
     }
 
-    apiCall() {
-      return axios.get('/user');
-    }
-
     onDataLoading() {
       const loadingState = update(this.state, { isLoading: { $set: true } });
       this.setState(loadingState);
@@ -38,6 +34,10 @@ const AuthDataServiceHoc = (PassedComponent) => {
     onDataFailed() {
       const loadingState = update(this.state, { isLoading: { $set: false } });
       this.setState(loadingState);
+    }
+
+    apiCall() {
+      return axios.get('/user');
     }
 
     fetchData(params) {

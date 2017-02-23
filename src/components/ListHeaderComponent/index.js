@@ -12,6 +12,6 @@ const ListHeaderComponent = () => (
 );
 
 ListHeaderComponent.propTypes = {
-}
+};
 
 export default ListHeaderComponent;

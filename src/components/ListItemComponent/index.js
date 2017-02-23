@@ -12,7 +12,7 @@ const ListItemComponent = ({ product }) => (
 );
 
 ListItemComponent.propTypes = {
-  product: PropTypes.object,
-}
+  product: PropTypes.object.isRequired,
+};
 
 export default ListItemComponent;

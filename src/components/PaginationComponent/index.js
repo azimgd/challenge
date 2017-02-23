@@ -28,6 +28,7 @@ const PaginationComponent = ({ isLoading, currentNumber, nextPage, prevPage }) =
 );
 
 PaginationComponent.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
   prevPage: PropTypes.func.isRequired,
   nextPage: PropTypes.func.isRequired,
   currentNumber: PropTypes.number.isRequired,

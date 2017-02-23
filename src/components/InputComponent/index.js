@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
-import styles from './index.scss';
 import cx from 'classnames';
+import styles from './index.scss';
 import hoc from './hoc';
 
 const InputComponent = ({ label, onFocus, onBlur, onChange, isFocused }) => (

@@ -62,6 +62,11 @@ class HomeContainer extends React.Component {
   }
 }
 
+HomeContainer.defaultProps = {
+  user: {},
+  responseData: {},
+};
+
 HomeContainer.propTypes = {
   fetchData: PropTypes.func.isRequired,
   prevPage: PropTypes.func.isRequired,
@@ -73,6 +78,10 @@ HomeContainer.propTypes = {
     page: PropTypes.number.isRequired,
     isLoading: PropTypes.bool.isRequired,
     searchQuery: PropTypes.string.isRequired,
+  }),
+  user: PropTypes.shape({
+    name: PropTypes.object,
+    isAuthorised: PropTypes.object,
   }),
 };
 

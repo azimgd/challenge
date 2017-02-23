@@ -9,11 +9,11 @@ class AuthContainer extends React.Component {
   render() {
     return (
       <div>
-        {this.props.isAuthorised ?
+        {!this.props.isAuthorised ?
           React.cloneElement(this.props.children, { user: this.props.user })
         : null}
 
-        {!this.props.isAuthorised ?
+        {this.props.isAuthorised ?
           <a href="/auth/google">Sign in with google</a>
         : null}
       </div>

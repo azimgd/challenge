@@ -23,11 +23,6 @@ const JokesDataServiceHoc = (PassedComponent, isPaginationEnabled, jokesPerPage)
       this.onfilterByCategories = this.onfilterByCategories.bind(this);
     }
 
-    apiCall(params) {
-      const { firstName, lastName } = params || {};
-      return axios.get(`https://api.icndb.com/jokes`, { params: { escape: 'javascript', firstName, lastName } });
-    }
-
     onDataLoading() {
       const loadingState = update(this.state, { isLoading: { $set: true } });
       this.setState(loadingState);
@@ -46,32 +41,14 @@ const JokesDataServiceHoc = (PassedComponent, isPaginationEnabled, jokesPerPage)
       this.setState(loadingState);
     }
 
-    fetchData(params) {
-      if (this.state.isLoading) { return; }
-      this.onDataLoading();
-      this.apiCall(params)
-      .then(this.onDataLoaded)
-      .catch(this.onDataFailed);
+    onSearch(e) {
+      const state = update(this.state, { searchQuery: { $set: e.target.value } });
+      this.setState(state);
     }
 
-    paginateResults(posts, page) {
-      return update(posts, {
-        data: { $paginate: { perPage: jokesPerPage, page } },
-      });
-    }
-
-    filterBySearch(posts, searchQuery) {
-      if (!searchQuery) { return posts; }
-      return update(posts, {
-        data: { $searchByQuery: searchQuery },
-      });
-    }
-
-    filterByCategories(posts, categories) {
-      if (!categories || !categories.length) { return posts; }
-      return update(posts, {
-        data: { $filterByCategories: categories },
-      });
+    onfilterByCategories(categories) {
+      const state = update(this.state, { categoriesQuery: { $set: categories } });
+      this.setState(state);
     }
 
     nextPage() {
@@ -84,14 +61,37 @@ const JokesDataServiceHoc = (PassedComponent, isPaginationEnabled, jokesPerPage)
       this.setState(state);
     }
 
-    onSearch(e) {
-      const state = update(this.state, { searchQuery: { $set: e.target.value } });
-      this.setState(state);
+    filterByCategories(posts, categories) {
+      if (!categories || !categories.length) { return posts; }
+      return update(posts, {
+        data: { $filterByCategories: categories },
+      });
     }
 
-    onfilterByCategories(categories) {
-      const state = update(this.state, { categoriesQuery: { $set: categories } });
-      this.setState(state);
+    filterBySearch(posts, searchQuery) {
+      if (!searchQuery) { return posts; }
+      return update(posts, {
+        data: { $searchByQuery: searchQuery },
+      });
+    }
+
+    paginateResults(posts, page) {
+      return update(posts, {
+        data: { $paginate: { perPage: jokesPerPage, page } },
+      });
+    }
+
+    fetchData(params) {
+      if (this.state.isLoading) { return; }
+      this.onDataLoading();
+      this.apiCall(params)
+      .then(this.onDataLoaded)
+      .catch(this.onDataFailed);
+    }
+
+    apiCall(params) {
+      const { firstName, lastName } = params || {};
+      return axios.get('https://api.icndb.com/jokes', { params: { escape: 'javascript', firstName, lastName } });
     }
 
     render() {

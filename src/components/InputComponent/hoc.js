@@ -6,25 +6,25 @@ const InputComponentHoc = (PassedComponent) => {
       super(props);
       this.state = {
         isFocused: false,
-      }
+      };
       this.onFocus = this.onFocus.bind(this);
       this.onBlur = this.onBlur.bind(this);
       this.onChange = this.onChange.bind(this);
     }
 
     onFocus(e) {
-      this.props.onFocus && this.props.onFocus(e);
+      if (this.props.onFocus) { this.props.onFocus(e); }
       this.setState({ isFocused: true });
     }
 
     onBlur(e) {
-      this.props.onBlur && this.props.onBlur(e);
+      if (this.props.onBlur) { this.props.onBlur(e); }
       if (e.target.value.length !== 0) { return; }
       this.setState({ isFocused: false });
     }
 
     onChange(e) {
-      this.props.onChange && this.props.onChange(e);
+      if (this.props.onChange) { this.props.onChange(e); }
       this.setState({ isFocused: true });
     }
 
@@ -40,6 +40,12 @@ const InputComponentHoc = (PassedComponent) => {
       );
     }
   }
+
+  WrappedComponent.defaultProps = {
+    onFocus: () => {},
+    onChange: () => {},
+    onBlur: () => {},
+  };
 
   WrappedComponent.propTypes = {
     onFocus: PropTypes.func,
