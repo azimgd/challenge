@@ -79,8 +79,9 @@ export const nextPage = (count, original) => {
 };
 export const prevPage = (count, original) => {
   if (!isInteger(count) || !isInteger(original)) { return 1; }
-  if (count < 1) { return 0; }
-  return original - count;
+  const next = original - count;
+  if (next < 1) { return 1; }
+  return next;
 };
 
 immutability.extend('$searchByQuery', searchByQuery);
