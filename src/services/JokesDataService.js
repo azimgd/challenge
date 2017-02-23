@@ -25,7 +25,7 @@ const JokesDataServiceHoc = (PassedComponent, isPaginationEnabled, jokesPerPage)
 
     apiCall(params) {
       const { firstName, lastName } = params || {};
-      return axios.get(`http://api.icndb.com/jokes`, { params: { escape: 'javascript', firstName, lastName } });
+      return axios.get(`https://api.icndb.com/jokes`, { params: { escape: 'javascript', firstName, lastName } });
     }
 
     onDataLoading() {
